@@ -1,0 +1,17 @@
+﻿@model System.Collections.Generic.IEnumerable<HD.Resistor.ResistorColor>
+@{
+    Layout = "../_Layout";
+    ViewData["Title"] = "Home Page";
+}
+
+@Html.React("Resistor", new
+{
+    pollInterval = 2000,
+    initialData = Model,
+    url = Url.Action("colors"),
+    submitUrl = Url.Action("calc")
+})
+
+@section scripts {
+    <script src="@Url.Content("~/js/app.jsx")"></script>    
+}

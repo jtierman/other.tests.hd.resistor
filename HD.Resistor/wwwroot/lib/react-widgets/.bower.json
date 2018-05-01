@@ -1,0 +1,15 @@
+{
+  "name": "react-widgets",
+  "homepage": "https://github.com/jquense/react-widgets",
+  "version": "4.2.6",
+  "_release": "4.2.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.2.6",
+    "commit": "0780a59768bfbbd4ddd3c9f3ee444d9c87292889"
+  },
+  "_source": "https://github.com/jquense/react-widgets.git",
+  "_target": "v4.2.6",
+  "_originalSource": "react-widgets",
+  "_direct": true
+}
