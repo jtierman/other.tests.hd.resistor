@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HD.Resistor
 {
+    [JsonExport]
     [JsonObject(
         MemberSerialization = MemberSerialization.OptOut,
         NamingStrategyType = typeof(Newtonsoft.Json.Serialization.DefaultNamingStrategy),

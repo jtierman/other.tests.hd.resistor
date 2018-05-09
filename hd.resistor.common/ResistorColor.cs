@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace HD.Resistor
 {
+    [JsonExport]
     [JsonObject(
         MemberSerialization = MemberSerialization.OptOut, 
         NamingStrategyType = typeof(Newtonsoft.Json.Serialization.DefaultNamingStrategy),
@@ -15,7 +16,7 @@ namespace HD.Resistor
     public class ResistorColor
     {
         [JsonRequired]
-        [JsonConverter(typeof(StringEnumConverter), false)]
+        //[JsonConverter(typeof(StringEnumConverter), false)]
         public ResistorColorTypes ColorType { get; set; }
 
         [JsonRequired]
@@ -24,6 +25,7 @@ namespace HD.Resistor
         public int? RAL { get; set; }   
         public int? Val { get; set; }
 
+        [JsonIgnore]
         public Color Color { get { return Color.FromName(Name); } }
         public int RGB { get { return this.Color.ToArgb(); } }
 
