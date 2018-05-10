@@ -26,9 +26,10 @@ interface ResistorColor_State {
     type: ResistorColorTypes;
     result: ResistorColor[];
 }
-export class ColorsController_Get extends React.Component<RouteComponentProps<{}>, ResistorColor_State> {
+export class ColorsController_Get extends React.Component<{ setColor(color: string): any; }, ResistorColor_State> {
     constructor() {
         super();
+    
         this.state = { result: [], type: ResistorColorTypes.None, loading: true };
     }
 
@@ -42,15 +43,16 @@ export class ColorsController_Get extends React.Component<RouteComponentProps<{}
             });
     }
     public render() {
-        let contents = this.state.loading
+        const me = this.state;
+
+        let contents = me.loading
             ? <p><em>Loading...</em></p>
-            : ColorsController_Get.renderTable(this.state.result);
+            : this.renderTable(me.result);
 
         let typeChoices = [ResistorColorTypes.None, ResistorColorTypes.Digit, ResistorColorTypes.Multiplier];
 
         return <div>
-            <h1>ColorType: {this.state.type.toString()}</h1>
-            <select onChange={(e) => this.go(typeChoices[e.target.selectedIndex])}>
+            <select onChange={(e) => { this.go(typeChoices[e.target.selectedIndex]); e.stopPropagation(); }}>
                 {typeChoices.map((v, i) =>
                     <option value={i}>{ResistorColorTypes[v]}</option>
                 )}
@@ -59,7 +61,7 @@ export class ColorsController_Get extends React.Component<RouteComponentProps<{}
         </div>;
     }
 
-    private static renderTable(data: ResistorColor[]) {
+    private renderTable(data: ResistorColor[]) {
         return <table className='table'>
             <thead>
                 <th>Name</th>
@@ -67,9 +69,11 @@ export class ColorsController_Get extends React.Component<RouteComponentProps<{}
             </thead>
             <tbody>
                 {data.map(x =>
-                    <tr key={x.RGB} onClick={(e) => { }}>
-                    <td>{x.Name}</td>
-                    <td>{x.Code}</td>
+                    <tr key={x.Name}
+                        style={{ backgroundColor: x.Name, cursor: 'pointer' }}
+                        onClick={(e) => { this.props.setColor(x.Name); e.stopPropagation(); }}>
+                        <td>{x.Name}</td>
+                        <td>{x.Code}</td>
                 </tr>
                 )}
             </tbody>
